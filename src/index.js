@@ -8,6 +8,9 @@ let availTickets = document.getElementById("ticket-num");
 const ticketPurchase = document.getElementById("buy-ticket");
 const moviePoster = document.getElementById("poster");
 let salesBtnTxt = "Sold Out";
+//document.querySelector(".sold-out").disabled = true;
+  
+
 
 function listFirstMovie() {
   fetch("http://localhost:3000/films/1")
@@ -29,7 +32,8 @@ function listFirstMovie() {
 
       if (availTickets.innerHTML == 0){
         document.querySelector(".sold-out").textContent = salesBtnTxt;
-        }
+        document.querySelector(".sold-out").disabled = true;
+      }
 
       getFilms();
     });
@@ -57,6 +61,7 @@ function listFilms(movies) {
     movieList.appendChild(li);
 
     li.onclick = () => {
+      document.querySelector(".sold-out").disabled = false;
       movieTitle.innerHTML = film.title;
       movieDuration.innerHTML = film.runtime;
       movieInfo.innerHTML = film.description;
@@ -112,7 +117,7 @@ function updateTicketsSold() {
 
 document.addEventListener("DOMContentLoaded", function (e) {
   e.preventDefault();
-
+  
   listFirstMovie();
 
   let ticketPurchase = document
