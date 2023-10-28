@@ -13,21 +13,21 @@ let salesBtnTxt = "Sold Out";
 
 //Function for listing the first movie
 function listFirstMovie() {
-  fetch("http://localhost:3000/films/1")
+  fetch("http://localhost:3000/films/")
     .then((response) => response.json())
     .then((movieDetails) => {
-      console.log(movieDetails);
+      console.log(movieDetails[0]);
       if (typeof window !== "undefined") {
-        window.firstMovie = movieDetails;
+        window.firstMovie = movieDetails[0];
       }
 
       //Displays information of the first movie item in the database
-      movieTitle.innerHTML = movieDetails.title;
-      movieDuration.innerHTML = movieDetails.runtime + "mins";
-      movieInfo.innerHTML = movieDetails.description;
-      movieTime.innerHTML = movieDetails.showtime;
-      moviePoster.src = movieDetails.poster;
-      availTickets.innerHTML = movieDetails.capacity - movieDetails.tickets_sold;
+      movieTitle.innerHTML = movieDetails[0].title;
+      movieDuration.innerHTML = movieDetails[0].runtime + "mins";
+      movieInfo.innerHTML = movieDetails[0].description;
+      movieTime.innerHTML = movieDetails[0].showtime;
+      moviePoster.src = movieDetails[0].poster;
+      availTickets.innerHTML = movieDetails[0].capacity - movieDetails[0].tickets_sold;
 
       //checks if the tickets are sold out and disables the button for buying one
       if (availTickets.innerHTML == 0) {
